@@ -4,10 +4,11 @@ using System.Diagnostics;
 using System.Text.Json;
 using Lesson3.ProcessAndThreads;
 
-// {
-//     await using var file = File.Create("payments.json");
-//     await JsonSerializer.SerializeAsync(file, PaymentsGenerator.GeneratePayments(100_000));
-// }
+{
+    await using var file = File.Create("payments.json");
+    await JsonSerializer.SerializeAsync(file, PaymentsGenerator.GeneratePayments(5_000_000));
+}
+return;
 var sw = Stopwatch.StartNew();
 await using var file2 = File.OpenRead("payments_50mb.json");
 var enumerable = JsonSerializer.Deserialize<IEnumerable<Payment>>(file2);

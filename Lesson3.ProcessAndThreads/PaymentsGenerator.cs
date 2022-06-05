@@ -47,7 +47,9 @@ internal class PaymentsGenerator
     {
         for (int i = 0; i < count; i++)
         {
-            yield return GetNextPayment(i % 2 == 1);
+            var isOutcome = i % 2 == 1;
+            var amount = GetNextPayment(isOutcome);
+            yield return isOutcome ? -amount : amount;
         }
     }
 
