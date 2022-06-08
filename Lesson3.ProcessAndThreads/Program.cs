@@ -9,6 +9,7 @@ using Lesson3.ProcessAndThreads;
     await JsonSerializer.SerializeAsync(file, PaymentsGenerator.GeneratePayments(5_000_000));
 }
 return;
+Thread.SpinWait(1);
 var sw = Stopwatch.StartNew();
 await using var file2 = File.OpenRead("payments_50mb.json");
 var enumerable = JsonSerializer.Deserialize<IEnumerable<Payment>>(file2);
