@@ -1,6 +1,6 @@
 ﻿namespace Lesson3.ProcessAndThreads;
 
-public class PaymentsCalc
+internal class PaymentsCalc
 {
     public static long CalcSimple(string incomeFileName, string outcomeFileName)
     {
