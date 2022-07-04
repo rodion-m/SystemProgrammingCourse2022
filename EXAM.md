@@ -103,3 +103,14 @@ values
     .AsParallel()
     .ForAll((value) => newValues.Add(value));
 ```
+8. Перед вами код из приложения на WPF. Что с ним не так? И как решить проблему?
+```csharp
+async void Button_Cick()
+{
+    try {
+        await File.WriteAllTextAsync("file.txt", textBoxResult).ConfigureAwait(false);
+    } catch(Exception e) {
+        textBoxResult.Text = "Произошла ошибка";
+    }
+}
+```
