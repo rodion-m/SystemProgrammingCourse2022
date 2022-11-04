@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,10 +32,7 @@ namespace Lesson3.ProcessAndThreadsWPF
             Task.Run(() =>
             {
                 var total = CalculateTotal();
-                Dispatcher.Invoke(() =>
-                {
-                    textBoxTotal.Text = total.ToString();
-                });
+                Dispatcher.Invoke(() => { textBoxTotal.Text = total.ToString(); });
             });
         }
 
@@ -46,6 +44,8 @@ namespace Lesson3.ProcessAndThreadsWPF
             {
                 total += long.Parse(line);
             }
+
+            //File.ReadAllLines(pathIncome).Where(it => it.Length > 10);
 
             var pathOutcome = @"C:\Users\rodio\Downloads\outcome.txt";
             foreach (string line in File.ReadAllLines(pathOutcome))

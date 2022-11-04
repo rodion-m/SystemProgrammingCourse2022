@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson3.ProcessAndThreads",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson3.ProcessAndThreadsWPF", "Lesson3.ProcessAndThreadsWPF\Lesson3.ProcessAndThreadsWPF.csproj", "{20F5BD04-50CE-404F-AE0C-A4081C0058F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson.AsyncAwait", "Lesson.AsyncAwait\Lesson.AsyncAwait.csproj", "{C5ABF51C-EC88-40C7-9CB7-D7F4A27A27A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectsLayoutDemo", "ObjectsLayoutDemo\ObjectsLayoutDemo.csproj", "{D0D866DD-4BE7-4762-9067-B565446EA63B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadPoolTuning", "ThreadPoolTuning\ThreadPoolTuning.csproj", "{68B24450-6CDF-4229-926B-429C179E73F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +24,17 @@ Global
 		{20F5BD04-50CE-404F-AE0C-A4081C0058F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20F5BD04-50CE-404F-AE0C-A4081C0058F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20F5BD04-50CE-404F-AE0C-A4081C0058F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5ABF51C-EC88-40C7-9CB7-D7F4A27A27A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5ABF51C-EC88-40C7-9CB7-D7F4A27A27A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5ABF51C-EC88-40C7-9CB7-D7F4A27A27A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5ABF51C-EC88-40C7-9CB7-D7F4A27A27A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0D866DD-4BE7-4762-9067-B565446EA63B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0D866DD-4BE7-4762-9067-B565446EA63B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0D866DD-4BE7-4762-9067-B565446EA63B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0D866DD-4BE7-4762-9067-B565446EA63B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68B24450-6CDF-4229-926B-429C179E73F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68B24450-6CDF-4229-926B-429C179E73F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68B24450-6CDF-4229-926B-429C179E73F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68B24450-6CDF-4229-926B-429C179E73F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
