@@ -103,7 +103,7 @@ values
     .AsParallel()
     .ForAll((value) => newValues.Add(value));
 ```
-8. Перед вами код из приложения на WPF. Что с ним не так? И как решить проблему?
+8. Перед вами код из приложения на WPF. Что с ним не так? И как решить проблему? *
 ```csharp
 async void Button_Cick()
 {
@@ -113,4 +113,16 @@ async void Button_Cick()
         textBoxResult.Text = "Произошла ошибка";
     }
 }
+```
+9. Как поведет себя ПК при запуске такой программы?
+```csharp
+Parallel.For(0, Environment.ProcessorCount, (_) => { for(;;) ; });
+```
+10. Как запуск такой программы скажется на производительности ПК?
+```csharp
+Parallel.For(0, Environment.ProcessorCount, (_) => Thread.Sleep(int.MaxValue));
+```
+11. Как такой код скажется на производительности программы? (что он спровоцирует?)
+```csharp
+Parallel.For(0, Environment.ProcessorCount, (_) => Thread.Sleep(int.MaxValue));
 ```
