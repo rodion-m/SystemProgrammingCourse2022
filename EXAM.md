@@ -22,9 +22,9 @@ async Task MyMethod()
 {
     try
     {
-        await WaitAndThrow();
+        WaitAndThrow();
     } catch(Exception e) {
-        Console.WriteLine(e);
+        Console.WriteLine("Ошибка");
     }
 }
 
@@ -61,7 +61,7 @@ async void Button_Cick()
 ```
 4. Перед вами код из приложения на WPF. Что с ним не так? И как решить проблему?
 ```csharp
-async void Button_Cick()
+void Button_Cick()
 {
     string file = File.ReadAllTextAsync("file.txt").Result;
     textBoxContent.Text = file;
@@ -75,7 +75,7 @@ async void Button_Cick()
     textBoxContent.Text = file;
 }
 
-async Task ReadFilesAsync(string path1, string path2)
+async Task<string> ReadFilesAsync(string path1, string path2)
 {
     var f1 = await File.ReadAllTextAsync(path1);
     var f2 = await File.ReadAllTextAsync(path2);
