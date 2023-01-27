@@ -108,7 +108,7 @@ values
 async void Button_Cick()
 {
     try {
-        await File.WriteAllTextAsync("file.txt", textBoxResult).ConfigureAwait(false);
+        await File.WriteAllTextAsync("file.txt", textBoxResult.Text).ConfigureAwait(false);
     } catch(Exception e) {
         textBoxResult.Text = "Произошла ошибка";
     }
