@@ -126,3 +126,13 @@ Parallel.For(0, Environment.ProcessorCount, (_) => Thread.Sleep(int.MaxValue));
 ```csharp
 Parallel.For(0, Environment.ProcessorCount, (_) => Thread.Sleep(int.MaxValue));
 ```
+12. Перед вами код, считывающий содержимое файлов по пути `path1` и `path2`:
+```csharp
+async Task<string> ReadFilesAsync(string path1, string path2)
+{
+    var text1 = await File.ReadAllTextAsync(path1);
+    var text2 = await File.ReadAllTextAsync(path2);
+    return text1 + text2;
+}
+```
+Как вы считаете, чтение файлов в этом коде происходит параллельно? И если нет, то испавьте код так, чтобы файлы считывались параллельно.
