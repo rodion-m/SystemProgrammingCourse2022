@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectsLayoutDemo", "Object
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadPoolTuning", "ThreadPoolTuning\ThreadPoolTuning.csproj", "{68B24450-6CDF-4229-926B-429C179E73F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadStackChecking", "ThreadStackChecking\ThreadStackChecking.csproj", "{357B8812-6E28-4551-A4F0-FE6457CDFD79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{68B24450-6CDF-4229-926B-429C179E73F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68B24450-6CDF-4229-926B-429C179E73F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68B24450-6CDF-4229-926B-429C179E73F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{357B8812-6E28-4551-A4F0-FE6457CDFD79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{357B8812-6E28-4551-A4F0-FE6457CDFD79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{357B8812-6E28-4551-A4F0-FE6457CDFD79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{357B8812-6E28-4551-A4F0-FE6457CDFD79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
