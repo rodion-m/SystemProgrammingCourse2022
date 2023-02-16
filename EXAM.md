@@ -5,11 +5,11 @@
 3. Что такое асинхронность?
 4. Зачем нужна асинхронность?
 5. Чем отличается асинхронность от многопоточности?
-6. Какие преимущества у тасок (Task) в сравнении с низкоуровневыми потоками (Thread)?
+6. Какие преимущества у тасок (`Task`) в сравнении с низкоуровневыми потоками (`Thread`)?
 7. Зачем нужен ThreadPool?
 8. Что такое Data Race? Приведите примеры.
 9. Что такое Deadlock? Приведите примеры.
-10. Зачем нужен оператор lock?
+10. Зачем нужен оператор `lock`?
 11. Что такое потокобезопасный класс?
 12. Приведите пример потокоНЕбезопасного типа в C#.
 13. Что плохого в использовании синхронных методов?
@@ -22,9 +22,9 @@ async Task MyMethod()
 {
     try
     {
-        await WaitAndThrow();
+        WaitAndThrow();
     } catch(Exception e) {
-        Console.WriteLine(e);
+        Console.WriteLine("Ошибка");
     }
 }
 
@@ -61,7 +61,7 @@ async void Button_Cick()
 ```
 4. Перед вами код из приложения на WPF. Что с ним не так? И как решить проблему?
 ```csharp
-async void Button_Cick()
+void Button_Cick()
 {
     string file = File.ReadAllTextAsync("file.txt").Result;
     textBoxContent.Text = file;
@@ -75,7 +75,7 @@ async void Button_Cick()
     textBoxContent.Text = file;
 }
 
-async Task ReadFilesAsync(string path1, string path2)
+async Task<string> ReadFilesAsync(string path1, string path2)
 {
     var f1 = await File.ReadAllTextAsync(path1);
     var f2 = await File.ReadAllTextAsync(path2);
@@ -103,14 +103,36 @@ values
     .AsParallel()
     .ForAll((value) => newValues.Add(value));
 ```
-8. Перед вами код из приложения на WPF. Что с ним не так? И как решить проблему?
+8. Перед вами код из приложения на WPF. Что с ним не так? И как решить проблему? *
 ```csharp
 async void Button_Cick()
 {
     try {
-        await File.WriteAllTextAsync("file.txt", textBoxResult).ConfigureAwait(false);
+        await File.WriteAllTextAsync("file.txt", textBoxResult.Text).ConfigureAwait(false);
     } catch(Exception e) {
         textBoxResult.Text = "Произошла ошибка";
     }
 }
 ```
+9. Как поведет себя ПК при запуске такой программы? Дайте свой прогноз по % ЦП, который будет потреблять такая программа.
+```csharp
+Parallel.For(0, Environment.ProcessorCount, (_) => { for(;;) ; });
+```
+10. Как запуск такой программы скажется на производительности ПК? Дайте свой прогноз по % ЦП, который будет потреблять такая программа.
+```csharp
+Parallel.For(0, Environment.ProcessorCount, (_) => Thread.Sleep(int.MaxValue));
+```
+11. Как такой код скажется на производительности программы? (что он спровоцирует?)
+```csharp
+Parallel.For(0, Environment.ProcessorCount, (_) => Thread.Sleep(int.MaxValue));
+```
+12. Перед вами код, считывающий содержимое файлов по пути `path1` и `path2`:
+```csharp
+async Task<string> ReadFilesAsync(string path1, string path2)
+{
+    var text1 = await File.ReadAllTextAsync(path1);
+    var text2 = await File.ReadAllTextAsync(path2);
+    return text1 + text2;
+}
+```
+Как вы считаете, чтение файлов в этом коде происходит параллельно? И если нет, то испавьте код так, чтобы файлы считывались параллельно.
