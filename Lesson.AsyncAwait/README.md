@@ -1,0 +1,142 @@
+﻿# Машина состояний
+Пример машины состояний ("конечного автомата"), которую генерирует компилятор из асинхронного метода для понимания того, как работает асинхронность в C#.
+
+# "Высокуровневый C#"
+Это код на обычном C#.
+```csharp
+using System;
+using System.Threading.Tasks;
+using System.IO;
+
+public class Program {
+    private string _fileContent;
+    
+    public async Task Main() {
+        await Task.Delay(100);
+        
+        int delay = int.Parse(Console.ReadLine());
+        await Task.Delay(delay);
+        
+        _fileContent = await File.ReadAllTextAsync("file1");
+        
+        await Task.Delay(200);
+    }
+}
+```
+
+# "Низкоуровневый C#"
+Далее следует код, который генерирует компилятор из высокоуровневого (обычного) C#.
+
+Код, сгенерированный компилятором трудно читать, поэтому я [попросил](https://chat.openai.com/share/ea94242e-4a09-4f86-9ef5-d881ade02b73) нейросеть провести небольшой рефакторинг, чтобы сделать его более читаемым. Вот что получилось:
+```csharp
+[CompilerGenerated]
+private sealed class AsyncStateMachine : IAsyncStateMachine
+{
+    // Определение состояний для машины состояний
+    public enum State
+    {
+        NotStarted,               // Не начато
+        WaitingAfterInitialDelay, // Ожидание после начальной задержки
+        WaitingForFileRead,       // Ожидание чтения файла
+        WaitingAfterFinalDelay,   // Ожидание после последней задержки
+        Finished                  // Завершено
+    }
+
+    public State CurrentState; // Текущее состояние машины состояний
+
+    public AsyncTaskMethodBuilder Builder; // Строитель задачи асинхронного метода
+
+    public Program Instance; // Экземпляр программы
+
+    private int DelayDuration; // Длительность задержки
+
+    private string FileContentTemp; // Временное хранение содержимого файла
+
+    private TaskAwaiter DelayAwaiter; // Ожидатель задержки
+
+    private TaskAwaiter<string> ReadFileAwaiter; // Ожидатель чтения файла
+
+    private void MoveNext()
+    {
+        try
+        {
+            switch (CurrentState)
+            {
+                case State.NotStarted:
+                    // Запуск начальной задержки
+                    DelayAwaiter = Task.Delay(100).GetAwaiter();
+                    if (DelayAwaiter.IsCompleted)
+                    {
+                        goto case State.WaitingAfterInitialDelay;
+                    }
+                    CurrentState = State.WaitingAfterInitialDelay;
+                    Builder.AwaitUnsafeOnCompleted(ref DelayAwaiter, ref this);
+                    break;
+
+                case State.WaitingAfterInitialDelay:
+                    // Получение результата начальной задержки
+                    DelayAwaiter.GetResult(); // Нужно для обработки исключений, на случай если в асинхронном методе произошла ошибка
+                    DelayDuration = int.Parse(Console.ReadLine());
+                    DelayAwaiter = Task.Delay(DelayDuration).GetAwaiter();
+                    if (DelayAwaiter.IsCompleted)
+                    {
+                        goto case State.WaitingForFileRead;
+                    }
+                    CurrentState = State.WaitingForFileRead;
+                    Builder.AwaitUnsafeOnCompleted(ref DelayAwaiter, ref this);
+                    break;
+
+                case State.WaitingForFileRead:
+                    // Получение результата задержки перед чтением файла
+                    DelayAwaiter.GetResult();
+                    ReadFileAwaiter = File.ReadAllTextAsync("file1").GetAwaiter();
+                    if (ReadFileAwaiter.IsCompleted)
+                    {
+                        goto case State.WaitingAfterFinalDelay;
+                    }
+                    CurrentState = State.WaitingAfterFinalDelay;
+                    Builder.AwaitUnsafeOnCompleted(ref ReadFileAwaiter, ref this);
+                    break;
+
+                case State.WaitingAfterFinalDelay:
+                    // Завершение чтения файла и установка результата
+                    FileContentTemp = ReadFileAwaiter.GetResult();
+                    Instance._fileContent = FileContentTemp;
+                    FileContentTemp = null;
+                    DelayAwaiter = Task.Delay(200).GetAwaiter();
+                    if (DelayAwaiter.IsCompleted)
+                    {
+                        CurrentState = State.Finished;
+                        return;
+                    }
+                    CurrentState = State.Finished;
+                    Builder.AwaitUnsafeOnCompleted(ref DelayAwaiter, ref this);
+                    break;
+            }
+        }
+        catch (Exception exception)
+        {
+            // Обработка исключений
+            CurrentState = State.Finished;
+            Builder.SetException(exception);
+        }
+    }
+}
+
+private string _fileContent; // Содержимое файла
+
+[AsyncStateMachine(typeof(AsyncStateMachine))]
+public Task Main()
+{
+    AsyncStateMachine stateMachine = new AsyncStateMachine();
+    stateMachine.Builder = AsyncTaskMethodBuilder.Create();
+    stateMachine.Instance = this;
+    stateMachine.CurrentState = AsyncStateMachine.State.NotStarted;
+    stateMachine.Builder.Start(ref stateMachine);
+    return stateMachine.Builder.Task;
+}
+```
+Кстати, этот код не запустится, потому что в нем нет некоторых вспомогательных методов, которые генерирует компилятор. Но он позволяет понять, как работает асинхронность в C#.
+
+# sharplab.io
+Оригинальный код можно посмотреть в sharplab.io: https://sharplab.io/#v2:CYLg1APgAgTAjAWAFBQAwAIpwKwG5lqZwB0AkgPL5IEDMmMRA7OgN7LofoAOATgJYA3AIYAXAKZEMAfQBmfADZiAwgHsAduI1VO6dpyh0oADkwA2dAFkhfNQAoAlKz06OUAJxniAETHyhAT1s4VFR7bRcOZxcbEXRgXwD0AF50GOIABSEeAGcxW1U1bJVFYgAlMSFgABkbPPswqJ13Tx8/QPi2hqQIyO6e2QVldU1YlOaAMUGyiuAAQXl5ABUxAA8RWez/NQBjWwAiOUU4Pa6e3T6I5qhTbwTAmBDTzgBfZGegA=
