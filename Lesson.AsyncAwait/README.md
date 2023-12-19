@@ -1,5 +1,5 @@
 ﻿# Машина состояний
-Пример машины состояний ("конечного автомата"), которую генерирует компилятор из асинхронного метода для понимания того, как работает асинхронность в C#.
+В этом документе приведен пример `машины состояний` (`конечного автомата`, `state machine`), которую генерирует компилятор из асинхронного метода для понимания того, как работает асинхронность в C#.
 
 # "Высокуровневый C#"
 Это код на обычном C#.
@@ -137,7 +137,7 @@ public Task Main()
 ```
 Кстати, этот код не запустится, потому что в нем нет некоторых вспомогательных методов, которые генерирует компилятор. Но он позволяет понять, как работает асинхронность в C#.
 
-*Advanced*: Еще интересно, что в Debug `AsyncStateMachine` для тасков представлен в виде класса, в Release - в виде структуры (`struct`). Но хоть это и структура, если выполнение пойдет действительно по асинхронномв сценарию, под капотом в Runtime все-таки произойдет аллокация для `AsyncStateMachine`. Зато в случае с `ValueTask`, аллокации не будет.
+*Advanced*: Еще интересно, что в Debug `AsyncStateMachine` для тасков представлен в виде класса, в Release - в виде структуры (`struct`). Но хоть это и структура, если выполнение пойдет действительно по асинхронному сценарию, под капотом в Runtime все-таки произойдет аллокация для `AsyncStateMachine`. Зато в случае с `ValueTask`, аллокации не будет.
 
 # sharplab.io
-Оригинальный код можно посмотреть в sharplab.io: https://sharplab.io/#v2:CYLg1APgAgTAjAWAFBQAwAIpwKwG5lqZwB0AkgPL5IEDMmMRA7OgN7LofoAOATgJYA3AIYAXAKZEMAfQBmfADZiAwgHsAduI1VO6dpyh0oADkwA2dAFkhfNQAoAlKz06OUAJxniAETHyhAT1s4VFR7bRcOZxcbEXRgXwD0AF50GOIABSEeAGcxW1U1bJVFYgAlMSFgABkbPPswqJ13Tx8/QPi2hqQIyO6e2QVldU1YlOaAMUGyiuAAQXl5ABUxAA8RWez/NQBjWwAiOUU4Pa6e3T6I5qhTbwTAmBDTzgBfZGegA=
+Оригинальный код и машину состояний можно посмотреть в sharplab.io: https://sharplab.io/#v2:CYLg1APgAgTAjAWAFBQAwAIpwKwG5lqZwB0AkgPL5IEDMmMRA7OgN7LofoAOATgJYA3AIYAXAKZEMAfQBmfADZiAwgHsAduI1VO6dpyh0oADkwA2dAFkhfNQAoAlKz06OUAJxniAETHyhAT1s4VFR7bRcOZxcbEXRgXwD0AF50GOIABSEeAGcxW1U1bJVFYgAlMSFgABkbPPswqJ13Tx8/QPi2hqQIyO6e2QVldU1YlOaAMUGyiuAAQXl5ABUxAA8RWez/NQBjWwAiOUU4Pa6e3T6I5qhTbwTAmBDTzgBfZGegA=
