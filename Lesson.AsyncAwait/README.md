@@ -144,7 +144,7 @@ public Task Main()
 Для `Task` это происходит внутри [AsyncTaskMethodBuilder<TResult>.GetStateMachineBox<TStateMachine>](https://source.dot.net/#System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/AsyncTaskMethodBuilderT.cs,220). 
 Для `ValueTask` это происходит внутри [PoolingAsyncValueTaskMethodBuilder<TResult>.GetStateMachineBox<TStateMachine>](https://source.dot.net/#System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/PoolingAsyncValueTaskMethodBuilderT.cs,212). Обратите внимание, что в случае с `ValueTask` в целях минимизации аллокаций для `AsyncStateMachineBox` [используется](https://source.dot.net/#System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/PoolingAsyncValueTaskMethodBuilderT.cs,212) пулинг (метод [StateMachineBox<TStateMachine> RentFromCache()](https://source.dot.net/#System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/PoolingAsyncValueTaskMethodBuilderT.cs,299)).
 
-Скриншоты аллокация для тестового метода [RealAsyncScenario](../AsyncAwaitAllocation/Program.cs#L15): ![dotMemory Screenshot](../AsyncAwaitAllocation/dotmemory_screenshots/RealAsyncScenario_Allocations.png)
+Скриншоты аллокация для тестового метода [RealAsyncScenarioYield](../AsyncAwaitAllocation/Program.cs#L15): ![dotMemory Screenshot](../AsyncAwaitAllocation/dotmemory_screenshots/RealAsyncScenario_Allocations.png)
 
 Проверялось в декабре 2023 на .NET 8.
 
