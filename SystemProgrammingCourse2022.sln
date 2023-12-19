@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadPoolTuning", "ThreadP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadStackChecking", "ThreadStackChecking\ThreadStackChecking.csproj", "{357B8812-6E28-4551-A4F0-FE6457CDFD79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncAwaitAllocation", "AsyncAwaitAllocation\AsyncAwaitAllocation.csproj", "{9DB94DE7-4E80-4F44-9402-176ED60879C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{357B8812-6E28-4551-A4F0-FE6457CDFD79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{357B8812-6E28-4551-A4F0-FE6457CDFD79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{357B8812-6E28-4551-A4F0-FE6457CDFD79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB94DE7-4E80-4F44-9402-176ED60879C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB94DE7-4E80-4F44-9402-176ED60879C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB94DE7-4E80-4F44-9402-176ED60879C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB94DE7-4E80-4F44-9402-176ED60879C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
