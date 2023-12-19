@@ -1,24 +1,38 @@
 ﻿namespace AsyncAwaitAllocation;
 
-class Program
+public class Program
 {
     static async Task Main(string[] args)
     {
         Console.WriteLine($"{nameof(Main)} {Environment.CurrentManagedThreadId}");
-        for (int i = 0; i < 1_000_000; i++)
+        for (int i = 0; i < 1_000; i++)
         {
-            await RealAsyncScenario();
+            await RealAsyncScenarioDelayInstantReturn();
         }
+
+        Console.WriteLine("Done");
         Console.ReadLine();
     }
 
-    static async Task RealAsyncScenario()
+    public static async Task RealAsyncScenarioYield()
     {
         await Task.Yield();
-        //Console.WriteLine($"{nameof(RealAsyncScenario)}: {Environment.CurrentManagedThreadId}");
+        //Console.WriteLine($"{nameof(RealAsyncScenarioYield)}: {Environment.CurrentManagedThreadId}");
     }
     
-    static async Task QuasiAsyncScenario()
+    public static async Task RealAsyncScenarioDelay()
+    {
+        await Task.Delay(0);
+        //Console.WriteLine($"{nameof(RealAsyncScenarioDelay)}: {Environment.CurrentManagedThreadId}");
+    }
+    
+    public static Task RealAsyncScenarioDelayInstantReturn()
+    {
+        return Task.Delay(0);
+        //Console.WriteLine($"{nameof(RealAsyncScenarioWithInstantReturn)}: {Environment.CurrentManagedThreadId}");
+    }
+    
+    public static async Task QuasiAsyncScenario()
     {
         for (int i = 0; i < 10; i++)
         {

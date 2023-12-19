@@ -144,9 +144,12 @@ public Task Main()
 Для `Task` это происходит внутри [AsyncTaskMethodBuilder<TResult>.GetStateMachineBox<TStateMachine>](https://source.dot.net/#System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/AsyncTaskMethodBuilderT.cs,220). 
 Для `ValueTask` это происходит внутри [PoolingAsyncValueTaskMethodBuilder<TResult>.GetStateMachineBox<TStateMachine>](https://source.dot.net/#System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/PoolingAsyncValueTaskMethodBuilderT.cs,212). Обратите внимание, что в случае с `ValueTask` в целях минимизации аллокаций для `AsyncStateMachineBox` [используется](https://source.dot.net/#System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/PoolingAsyncValueTaskMethodBuilderT.cs,212) пулинг (метод [https://source.dot.net/#System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/PoolingAsyncValueTaskMethodBuilderT.cs,299)).
 
-Скриншоты аллокация для тестового метода [RealAsyncScenario]: {put screenshot here as MD}
+Скриншоты аллокация для тестового метода [RealAsyncScenario](../AsyncAwaitAllocation/Program.cs#L15): ![dotMemory Screenshot](../AsyncAwaitAllocation/dotmemory_screenshots/RealAsyncScenario_Allocations.png)
 
 Проверялось в декабре 2023 на .NET 8.
+
+# Что еще почитать по теме
+Например, [целый гайд от Стивена Тауба "How Async/Await Really Works in C#"](https://devblogs.microsoft.com/dotnet/how-async-await-really-works/) ("Как на самом деле работает Async/Await в C#"). Переводы [доступны](https://habr.com/ru/articles/732738/) на Хабре.
 
 # sharplab.io
 Оригинальный код и машину состояний можно посмотреть в sharplab.io: https://sharplab.io/#v2:CYLg1APgAgTAjAWAFBQAwAIpwKwG5lqZwB0AkgPL5IEDMmMRA7OgN7LofoAOATgJYA3AIYAXAKZEMAfQBmfADZiAwgHsAduI1VO6dpyh0oADkwA2dAFkhfNQAoAlKz06OUAJxniAETHyhAT1s4VFR7bRcOZxcbEXRgXwD0AF50GOIABSEeAGcxW1U1bJVFYgAlMSFgABkbPPswqJ13Tx8/QPi2hqQIyO6e2QVldU1YlOaAMUGyiuAAQXl5ABUxAA8RWez/NQBjWwAiOUU4Pa6e3T6I5qhTbwTAmBDTzgBfZGegA=
