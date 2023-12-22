@@ -83,7 +83,7 @@ private sealed class AsyncStateMachine : IAsyncStateMachine
                         goto case State.WaitingForFileRead;
                     }
                     CurrentState = State.WaitingForFileRead;
-                    Builder.AwaitUnsafeOnCompleted(ref DelayAwaiter, ref this);
+                    Builder.AwaitUnsafeOnCompleted(ref DelayAwaiter, ref this); // Запланирует, что указанная машина состояний будет продвинута вперед после завершения работы указанного awaiter (будет вызван метод MoveNext).
                     break;
 
                 case State.WaitingForFileRead:
