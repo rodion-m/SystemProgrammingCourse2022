@@ -4,6 +4,9 @@ public class Program
 {
     static async Task Main(string[] args)
     {
+        var res = await DownloadFileAsync();
+        return;
+        
         Console.WriteLine($"{nameof(Main)} {Environment.CurrentManagedThreadId}");
         for (int i = 0; i < 1_000; i++)
         {
@@ -38,5 +41,16 @@ public class Program
         {
         }
         //Console.WriteLine($"{nameof(QuasiAsyncScenario)}: {Environment.CurrentManagedThreadId}");
-    } 
+    }
+    
+    private static readonly HttpClient _httpClient = new();
+    public static async Task<byte[]> DownloadFileAsync()
+    {
+        return await _httpClient.GetByteArrayAsync("https://github.com/dotnet/eShop/raw/main/.gitattributes");
+    }
+    
+    public static Task<byte[]> DownloadFileAsyncInstantReturn()
+    {
+        return _httpClient.GetByteArrayAsync("https://github.com/dotnet/eShop/raw/main/.gitattributes");
+    }
 }
